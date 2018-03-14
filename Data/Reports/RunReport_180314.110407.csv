@@ -1,0 +1,2 @@
+﻿wbType,wbLevel,wbParentType,wbPath,wbHandleError,wbStatus,wbFinalExec,wbExceptionType,wbStart,wbParentStart,wbDurationSec,wbDurationHrs,message,level,wbKey,configError,optionalInfo
+UiPEngineQueue,0,,UiPEngineQueue,Rethrow,Failed,True,NullReferenceException,03/14/2018 11:04:04,03/14/2018 11:04:04,2.3517319,0.000653536555555556,Work Block UiPEngineQueue failed with exception Object reference not set to an instance of an object. at Source Anonymously Hosted DynamicMethods Assembly,Error,996039742d979bdd3d94c677fa947ed9,False,No info
