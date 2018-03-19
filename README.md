@@ -3,15 +3,25 @@
 
 This engine contains code that will do the following:
 1. Read a configuration file, by default located in Data\Config.xlsx and output as a dictionary named config
-2. Calls ProcessLayer\InitAllApplications.xaml, where you should initialize apps
+
+2. Calls ProcessLayer\InitAllApplications.xaml, where you should initialize applications
+
 3. While there are items in the Queue, read a new Item and process it.
+
 --3.1 Get Item from queue
+
 --3.2 Execute Process - retry if you run into a AppEx
-----3.2.1 Calls ProcessLayer\ProcessTransaction.xaml, where you should input data into your opened    apps
+
+----3.2.1 Calls ProcessLayer\ProcessTransaction.xaml, where you should input data into your opened applications
+
 ----3.2.2 Evaluate Process wb output
+
 ----3.2.3 Recover if wb failed with AppEx
+
 ------3.2.3.1 Call ProcessLayer\CloseAllApplications.xaml
+
 ------3.2.3.2 Call ProcessLayer\InitAllApplications.xaml
+
 4. Call ProcessLayer\CloseAllApplications.xaml
 
 ### For New Project ###
