@@ -1,2 +1,0 @@
-﻿wbType,wbLevel,wbParentType,wbPath,wbHandleError,wbStatus,wbFinalExec,wbExceptionType,wbStart,wbParentStart,wbDurationSec,wbDurationHrs,message,level,wbKey,configError,optionalInfo
-UiPEngineQueue,0,,UiPEngineQueue,Rethrow,Successful,True,,03/22/2018 13:54:20,03/22/2018 13:54:20,4.0155977,0.00111544380555556,Work Block UiPEngineQueue successful,Info,9d0159476761dd1726b6337f54e15bc7,False,No info
