@@ -151,7 +151,6 @@
           </ui:AddLogFields>
           <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke wbLogging workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Framework\wbLogging.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="in_wbType">[wbProcess_Type]</InArgument>
               <InArgument x:TypeArguments="s:DateTime" x:Key="in_wbStart">[wbProcess_StartTime]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_wbPath">[wbProcess_Path]</InArgument>
               <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:Object))" x:Key="in_ChildAudit">[wbProcess_Audit]</InArgument>
@@ -217,7 +216,6 @@
             <Sequence sap2010:Annotation.AnnotationText="Logging for work block. The sequence adds logging fields and counts the number of successful and failed child processes by adding wbName_Audit of the child processes to the dictionary named wbName_Audit &lt;string, object&gt; of the parent process" DisplayName="wb Logging Failed" sap2010:WorkflowViewState.IdRef="Sequence_49">
               <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke wbLogging workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Framework\wbLogging.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_wbType">[wbProcess_Type]</InArgument>
                   <InArgument x:TypeArguments="s:DateTime" x:Key="in_wbStart">[wbProcess_StartTime]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_wbPath">[wbProcess_Path]</InArgument>
                   <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:Object))" x:Key="in_ChildAudit">[wbProcess_Audit]</InArgument>
@@ -240,7 +238,7 @@
         </ActivityAction>
       </Catch>
     </TryCatch.Catches>
-    <sads:DebugSymbol.Symbol>d2FHOlxNeSBEcml2ZVxXb3Jrc3BhY2VcVWlQYXRoXFRlbXBsYXRlc1xVaVBFbmdpbmVRdWV1ZVByb2Nlc3NcUHJvY2Vzc0xheWVyXFByb2Nlc3NUcmFuc2FjdGlvbi54YW1sVAFvAXQBAk8D9AEOAgEBUTZRRgIBPFI0UlQCATtTNFNkAgE4VFhUhgECATdXB7EBEgIBPbkBC+8BFgIBAlgJeRQCAWh6CYoBFAIBXosBCbABFAIBProBDdgBGAIBItkBDekBGAIBCOoBDe4BEgIBA1kLYBQCAXdhC2gUAgFzaQtwFAIBbXELeBQCAWl8OnxPAgFffguJARACAWCMAQuQASUCAVuRAQuXAR0CAVeYAQumASMCAUOnAQuvASACAT+7AQ/XARoCASPaAQ/oAScCAQnqAeQB6gHZAgIBBOwBEewBSQIBB142XlQCAXpbN1tHAgF4ZjhmRgIBdmM5Y04CAXRuNm5aAgFwazdrRwIBbnZadqEBAgFsc1tzbAIBan4ZfrEBAgFhgAEPgAG8AQIBZoMBD4cBFAIBYowBsgKMAcgCAgFclQFSlQFgAgFalAFSlAFgAgFZkwFOkwGPAQIBWJoBSJoBWAIBVZwBSJwBWAIBU50BcJ0BgQECAVGiAVKiAVcCAVCbAUubAWACAU6eAVGeAWMCAUyhAUyhAYQBAgFKnwFOnwFSAgFJmAG8AZgB1gECAUijAXSjAX4CAUagAU+gAWECAUSqATiqAUcCAUKrATirAUsCAUGsATisAUsCAUC/ARHGARoCATHHARHWARYCASTcAUzcAVwCASDeAUzeAVwCAR7fAXTfAYUBAgEc5AFW5AFbAgEb3QFP3QFkAgEZ5gFV5gFgAgEX4AFV4AFnAgEV4wFQ4wHFAQIBEeEBUuEBYgIBD9oBwAHaAdoBAgEO5QF45QGCAQIBDOIBU+IBZQIBCoABOIABjwECAWeDAR2DAX8CAWOFAROFAacBAgFkxAE9xAGhAQIBNMEBPsEBVwIBMscBH8cBOgIBJckBFc0BLwIBLNABFdQBLwIBJ4UBPoUBegIBZckBmALJAa0CAgEvyQHOAskB5AICAS3QAZQC0AGpAgIBKtABygLQAeACAgEo</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d2FHOlxNeSBEcml2ZVxXb3Jrc3BhY2VcVWlQYXRoXFRlbXBsYXRlc1xVaVBFbmdpbmVRdWV1ZVByb2Nlc3NcUHJvY2Vzc0xheWVyXFByb2Nlc3NUcmFuc2FjdGlvbi54YW1sUgFvAXQBAk8D8gEOAgEBUTZRRgIBOlI0UlQCATlTNFNkAgE2VFhUhgECATVXB7ABEgIBO7gBC+0BFgIBAlgJeRQCAWR6CYoBFAIBWosBCa8BFAIBPLkBDdcBGAIBINgBDecBGAIBCOgBDewBEgIBA1kLYBQCAXNhC2gUAgFvaQtwFAIBaXELeBQCAWV8OnxPAgFbfguJARACAVyMAQuQASUCAVeRAQuXAR0CAVOYAQulASMCAUGmAQuuASACAT26AQ/WARoCASHZAQ/mAScCAQnoAeQB6AHZAgIBBOoBEeoBSQIBB142XlQCAXZbN1tHAgF0ZjhmRgIBcmM5Y04CAXBuNm5aAgFsazdrRwIBanZadqEBAgFoc1tzbAIBZn4ZfrEBAgFdgAEPgAG8AQIBYoMBD4cBFAIBXowBsgKMAcgCAgFYlQFSlQFgAgFWlAFSlAFgAgFVkwFOkwGPAQIBVJsBSJsBWAIBUZwBcJwBgQECAU+hAVKhAVcCAU6aAUuaAWACAUydAVGdAWMCAUqgAUygAYQBAgFIngFOngFSAgFHmAG8AZgB1gECAUaiAXSiAX4CAUSfAU+fAWECAUKpATipAUcCAUCqATiqAUsCAT+rATirAUsCAT6+ARHFARoCAS/GARHVARYCASLcAUzcAVwCAR7dAXTdAYUBAgEc4gFW4gFbAgEb2wFP2wFkAgEZ5AFV5AFgAgEX3gFV3gFnAgEV4QFQ4QHFAQIBEd8BUt8BYgIBD9kBwAHZAdoBAgEO4wF44wGCAQIBDOABU+ABZQIBCoABOIABjwECAWODAR2DAX8CAV+FAROFAacBAgFgwwE9wwGhAQIBMsABPsABVwIBMMYBH8YBOgIBI8gBFcwBLwIBKs8BFdMBLwIBJYUBPoUBegIBYcgBmALIAa0CAgEtyAHOAsgB5AICASvPAZQCzwGpAgIBKM8BygLPAeACAgEm</sads:DebugSymbol.Symbol>
   </TryCatch>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
