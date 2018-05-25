@@ -109,10 +109,11 @@
                 <InArgument x:TypeArguments="s:DateTime">[datetime.Now]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:AddLogFields sap2010:Annotation.AnnotationText="Default wb fields&#xA;wbName&#xA;wbParentName&#xA;wbPath&#xA;wbLevel&#xA;wbStartTime&#xA;wbState" DisplayName="Publish default wb fields" sap2010:WorkflowViewState.IdRef="AddLogFields_1">
+            <ui:AddLogFields sap2010:Annotation.AnnotationText="Default wb fields&#xA;wbName&#xA;wbParentName&#xD;&#xA;wbKey&#xA;wbPath&#xA;wbLevel&#xA;wbStartTime&#xA;wbState" DisplayName="Publish default wb fields" sap2010:WorkflowViewState.IdRef="AddLogFields_1">
               <ui:AddLogFields.Fields>
                 <InArgument x:TypeArguments="x:String" x:Key="wbName">[wbName]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="wbParentName">[if(wbPath.Count(Function(x) x="|") = 0, string.Empty, wbPath.Split("|".ToCharArray)(wbPath.Count(Function(x) x="|")-1))]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="wbKey">[Guid.NewGuid.ToString]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="wbPath">[wbPath]</InArgument>
                 <InArgument x:TypeArguments="x:Int32" x:Key="wbLevel">[wbPath.Count(Function(x) x="|")]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="wbState">Executing</InArgument>
@@ -236,7 +237,7 @@
                                       <InArgument x:TypeArguments="x:Boolean">[if(not(Exception.GetType.Name="BusinessRuleException"), true, false)]</InArgument>
                                     </Assign.Value>
                                   </Assign>
-                                  <ui:LogMessage DisplayName="Log message" Level="Error" Message="[exception.ToString]" sap2010:WorkflowViewState.IdRef="LogMessage_17" />
+                                  <ui:LogMessage DisplayName="Log message" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Error" Message="[exception.ToString]" />
                                 </Sequence>
                               </ActivityAction>
                             </Catch>
@@ -342,7 +343,7 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <sads:DebugSymbol.Symbol>d0lDOlxVc2Vyc1xtaWhhaS5kdW5hcmVhbnVcRG9jdW1lbnRzXFVpUGF0aFxVaVBFbmdpbmVRdWV1ZVByb2Nlc3NcTWFpbi54YW1shgEBaAF3AQJNA9oCDgIBAU4F2AIQAgECUDhQSAIBGVE2UUYCARhSNlJAAgEWVgm9AhQCARrFAg3UAhgCAQNXC4ABFgMBmQGBAQutAhYCASSuAgu8AhYCARvGAg/SAhoCAQXTAg/TAkYCAQRYDV8WAwG0AWANZxYDAawBaA1vFgMBqAFwDXkfAwGeAXoNfh8DAZ0Bfw1/ugEDAZoBhQENtQEYAgF1tgENvQEYAgFuvgENpAIXAgEspQINrAIYAgElrwINtQIfAgEgtgINugIfAgEfuwINuwLFAQIBHMcCEc8CIwIBDtACEdAC2AECAQrRAhHRAukBAgEGXThdRgMBtwFaOVpBAwG1AWU4ZYgBAwGvAWI5YkEDAa0BbTptSAMBqwFqO2pIAwGpAXNNc8YBAwGnAXdMd3sDAaUBckdyTwMBowF0R3RPAwGhAXZIdlEDAaABdUd1aAMBnwF/iwF/twEDAZsBhgEPjAEnAwGTAY0BD7QBGgIBdrcBD7wBJwIBb74BmgG+AbsBAgFtvwEPowIaAgEtpgIPqwInAgEmsQJJsQJTAgEjsgJIsgJNAgEiswJOswKIAQIBIbsCiwG7AsIBAgEdyQJNyQJTAgEVygJMygJRAgEUzQJXzQJqAgESywJSywKMAQIBEcwCVMwCbAIBD9ACH9ACjwECAQvRApIB0QLmAQIBB4oBaIoBcAMBlwGGAcYBhgHmAQMBlgGJAVSJAX4DAZUBiAFQiAFgAwGUAZMBEZMB1AMDAYwBlAERswEWAgF3uQFSuQFaAgFzugFmugFuAgFxtwG7AbcB4gECAXDAARHCARwCAWfDARGiAhYCAS6oAlKoAloCASqpAmapAm4CASimArwBpgLkAQIBJ5MBqwOTAbcDAwGRAZMB2wGTAaMDAwGPAZMBwwOTAdEDAwGNAZQBH5QBMwIBeJYBFa4BIAIBfLEBFbEB4AECAXrBARPBAfkBAgFowwEfwwFAAgEvxQEVoAIgAgEwlwEXlwH3AQMBhwGYARetARwCAX2xAUuxAbMBAgF7wQGXAcEB0gECAWvBAeMBwQH2AQIBaccBRccBSAIBMckBF9ABIAIBY9EBF58CIgIBMpcB6AGXAfQBAwGKAZcBvwGXAdwBAwGIAZgBJZgBwQECAX6aARuhASQDAYMBpAEbqwEkAgF/zgFBzgFaAgFmywFCywFPAgFk0wFJ0wFQAgEz1QEZ9AEkAgFP9QEZngIeAgE0nwFGnwGkAQMBhgGcAUecAWEDAYQBqQFGqQFJAwGCAaYBR6YBYQMBgAHXAR3eATUCAVnmASHwASwCAVD1AZEC9QGhAgIBNfcBHZwCKAIBN9wBXtwBawIBYdkBYNkBaAIBX9oBdNoBfAIBXdsBZ9sBeAIBW9cB0gHXAfgBAgFa5wEj7gEsAgFU7wEj7wGrAQIBUfgBH4sCKgIBRowCH5MCKgIBP5QCH5sCKgIBOOwBT+wBlQECAVfpAVDpAV4CAVXvAWLvAXgCAVL6ASP/ATsCAUuHAieHAoYCAgFHjQIhkgI5AgFAlQIhmgI5AgE5/AFg/AGMAQIBTfoB2gH6AfkBAgFMhwKUAYcCgwICAUiPAmSPAmwCAUSQAniQAoABAgFCjQLOAY0C9gECAUGXAmSXAmwCAT2YAniYAoABAgE7lQLOAZUC9QECATo=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0lDOlxVc2Vyc1xtaWhhaS5kdW5hcmVhbnVcRG9jdW1lbnRzXFVpUGF0aFxVaVBFbmdpbmVRdWV1ZVByb2Nlc3NcTWFpbi54YW1shwEBaAF3AQJNA9sCDgIBAU4F2QIQAgECUDhQSAIBGVE2UUYCARhSNlJAAgEWVgm+AhQCARrGAg3VAhgCAQNXC4EBFgMBmQGCAQuuAhYCASSvAgu9AhYCARvHAg/TAhoCAQXUAg/UAkYCAQRYDV8WAwG1AWANZxYDAa0BaA1vFgMBqQFwDXofAwGeAXsNfx8DAZ0BgAENgAG6AQMBmgGGAQ22ARgCAXW3AQ2+ARgCAW6/AQ2lAhcCASymAg2tAhgCASWwAg22Ah8CASC3Ag27Ah8CAR+8Ag28AsUBAgEcyAIR0AIjAgEO0QIR0QLYAQIBCtICEdIC6QECAQZdOF1GAwG4AVo5WkEDAbYBZThliAEDAbABYjliQQMBrgFtOm1IAwGsAWo7akgDAaoBdEZ0XQMBqAFzTXPGAQMBpwF4THh7AwGlAXJHck8DAaMBdUd1TwMBoQF3SHdRAwGgAXZHdmgDAZ8BgAGLAYABtwEDAZsBhwEPjQEnAwGTAY4BD7UBGgIBdrgBD70BJwIBb78BmgG/AbsBAgFtwAEPpAIaAgEtpwIPrAInAgEmsgJJsgJTAgEjswJIswJNAgEitAJOtAKIAQIBIbwCiwG8AsIBAgEdygJNygJTAgEVywJMywJRAgEUzgJXzgJqAgESzAJSzAKMAQIBEc0CVM0CbAIBD9ECH9ECjwECAQvSApIB0gLmAQIBB4sBaIsBcAMBlwGHAcYBhwHmAQMBlgGKAVSKAX4DAZUBiQFQiQFgAwGUAZQBEZQB1AMDAYwBlQERtAEWAgF3ugFSugFaAgFzuwFmuwFuAgFxuAG7AbgB4gECAXDBARHDARwCAWfEARGjAhYCAS6pAlKpAloCASqqAmaqAm4CASinArwBpwLkAQIBJ5QBqwOUAbcDAwGRAZQB2wGUAaMDAwGPAZQBwwOUAdEDAwGNAZUBH5UBMwIBeJcBFa8BIAIBfLIBFbIB4AECAXrCARPCAfkBAgFoxAEfxAFAAgEvxgEVoQIgAgEwmAEXmAH3AQMBhwGZAReuARwCAX2yAUuyAbMBAgF7wgGXAcIB0gECAWvCAeMBwgH2AQIBacgBRcgBSAIBMcoBF9EBIAIBY9IBF6ACIgIBMpgB6AGYAfQBAwGKAZgBvwGYAdwBAwGIAZkBJZkBwQECAX6bARuiASQDAYMBpQEbrAEkAgF/zwFBzwFaAgFmzAFCzAFPAgFk1AFJ1AFQAgEz1gEZ9QEkAgFP9gEZnwIeAgE0oAFGoAGkAQMBhgGdAUedAWEDAYQBqgFGqgFJAwGCAacBR6cBYQMBgAHYAR3fATUCAVnnASHxASwCAVD2AZEC9gGhAgIBNfgBHZ0CKAIBN90BXt0BawIBYdoBYNoBaAIBX9sBdNsBfAIBXdwBZ9wBeAIBW9gB0gHYAfgBAgFa6AEj7wEsAgFU8AEj8AGrAQIBUfkBH4wCKgIBRo0CH5QCKgIBP5UCH5wCKgIBOO0BT+0BlQECAVfqAVDqAV4CAVXwAZIB8AGoAQIBUvsBI4ACOwIBS4gCJ4gChgICAUeOAiGTAjkCAUCWAiGbAjkCATn9AWD9AYwBAgFN+wHaAfsB+QECAUyIApQBiAKDAgIBSJACZJACbAIBRJECeJECgAECAUKOAs4BjgL2AQIBQZgCZJgCbAIBPZkCeJkCgAECATuWAs4BlgL1AQIBOg==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -367,25 +368,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddLogFields_1" sap:VirtualizedContainerService.HintSize="314,139">
+      <sap2010:ViewStateData Id="AddLogFields_1" sap:VirtualizedContainerService.HintSize="314,154">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddLogFields_2" sap:VirtualizedContainerService.HintSize="314,50">
+      <sap2010:ViewStateData Id="AddLogFields_2" sap:VirtualizedContainerService.HintSize="314,49">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_14" sap:VirtualizedContainerService.HintSize="314,93" />
-      <sap2010:ViewStateData Id="Sequence_54" sap:VirtualizedContainerService.HintSize="653,198">
+      <sap2010:ViewStateData Id="LogMessage_14" sap:VirtualizedContainerService.HintSize="314,91" />
+      <sap2010:ViewStateData Id="Sequence_54" sap:VirtualizedContainerService.HintSize="653,981">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
@@ -631,7 +632,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="675,2997">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="675,3780">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -673,7 +674,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="693,3416">
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="693,4199">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -682,7 +683,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="715,3567">
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="715,4350">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -690,7 +691,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="basicFramework_1" sap:VirtualizedContainerService.HintSize="755,3647" />
+      <sap2010:ViewStateData Id="basicFramework_1" sap:VirtualizedContainerService.HintSize="755,4430" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
