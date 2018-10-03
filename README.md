@@ -24,6 +24,13 @@ This engine contains code that will do the following:
 
 4. Call ProcessLayer\CloseAllApplications.xaml
 
+### Dependencies ###
+UiPath.Core.Activities
+UiPath.Credentials.Activities
+UiPath.Excel.Activities
+UiPath.Mail.Activities
+UiPath.WebAPI.Activities
+
 ### For New Project ###
 To begin implementing take the following steps:
 
@@ -35,7 +42,6 @@ To begin implementing take the following steps:
 
 *ProcessLayer\CloseAllApplications.xaml* - write business code to close all applications you have opened at previous step.
 
-*ProcessLayer\ProcessTransaction.xaml* - write business code to use applications that are open and data from io_TransactionItem and complete the transaction. At the end of the transaction, take the applications to the page they were at when you began the transaction. 
+*ProcessLayer\ProcessTransaction.xaml* - write business code to use applications that are open and data from io_TransactionItem and complete the transaction. At the end of the transaction, take the applications to the page they were at when you began the transaction.
 
-3. Execute and have fun! 
-
+3. Execute and have fun!
